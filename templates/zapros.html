@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <title>Запросы</title>
+  </head>
+  <body style="background-color: white">
+    <div class="block">
+      {% for i in range(1, 11) %}
+      <form action="{{ url_for('query_page', param = i) }}">
+        <button class="btn btn-primary mt-3 mr-2" type="submit">
+          Запрос {{ i }}
+        </button>
+      </form>
+      {% endfor %}
+    </div>
+    {% if param == 1 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Льгота</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['surname'] }}</td>
+        <td>{{ elem['name'] }}</td>
+        <td>{{ elem['name_lgot'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 2 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Название лекарства</th>
+        <th>Форма выпуска</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['lec_name'] }}</td>
+        <td>{{ elem['form'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 3 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Название лекарства</th>
+        <th>Дата производства</th>
+        <th>Срок в днях</th>
+        <th>Дата конца срока</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['lec_name'] }}</td>
+        <td>{{ elem['data_partii'] }}</td>
+        <td>{{ elem['srok'] }} дн.</td>
+        <td>{{ elem['dat'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 4 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Фамилия врача</th>
+        <th>Имя врача</th>
+        <th>Специальность</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['surname_doc'] }}</td>
+        <td>{{ elem['name_doc'] }}</td>
+        <td>{{ elem['prof_doc'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 5 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Название лекарства</th>
+        <th>Дата производства</th>
+        <th>Срок в днях</th>
+        <th>Дата конца срока</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['lec_name'] }}</td>
+        <td>{{ elem['data_partii'] }}</td>
+        <td>{{ elem['srok'] }} дн.</td>
+        <td>{{ elem['dat'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 6 %}
+    <p style="text-align: center; margin-top: 20px">
+      Суммарное количество лекарств в аптеке с id_apt = 1 составляет {{
+      q[0]['s'] }} шт.
+    </p>
+    {% endif %} {% if param == 7 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Фамилия пациента</th>
+        <th>Имя пациента</th>
+        <th>Диагноз (сопутствующий)</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['surname'] }}</td>
+        <td>{{ elem['name'] }}</td>
+        <td>{{ elem['name_diag'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 8 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Название лекарства</th>
+        <th>Форма выпуска</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['lec_name'] }}</td>
+        <td>{{ elem['form'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 9 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Номер аптеки</th>
+        <th>Название аптеки</th>
+        <th>Город</th>
+        <th>Улица</th>
+        <th>Дом</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['num_apt'] }}</td>
+        <td>{{ elem['name_apt'] }}</td>
+        <td>{{ elem['city'] }}</td>
+        <td>{{ elem['street'] }}</td>
+        <td>{{ elem['house'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} {% if param == 10 %}
+    <table class="table mt-3">
+      <tr>
+        <th>Название лекарства</th>
+        <th>Количество</th>
+        <th>Дата партии</th>
+        <th>Название аптеки</th>
+      </tr>
+      {% for elem in q %}
+      <tr>
+        <td>{{ elem['lec_name'] }}</td>
+        <td>{{ elem['kolich'] }}</td>
+        <td>{{ elem['data_partii_z'] }}</td>
+        <td>{{ elem['name_apt'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h2>Заявки на поставку лекарств</h2>
+      <div class="post row">
+        {% for z in zayav %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="{{ url_for('lec_page', lec_id = z['id_lec']) }}">
+              {{ z['lec_name'] }}
+            </a>
+          </h3>
+          <i class="far fa-user">Дата партии: {{ z['data_partii_z'] }}</i>
+          <p class="preview-text">Количество: {{ z['kolich'] }} штук</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

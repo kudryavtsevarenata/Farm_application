@@ -1,0 +1,49 @@
+{% extends 'sidebar.html' %}
+{% block title %}Selling{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>{{ recept['surname'] }} {{recept['name']}}</h1>
+      <h2>Перечень допустимых лекарств</h2>
+      <form method="POST">
+        <div class="post row">
+          {% for lec in lecs %}
+          <div class="lec-text col-5">
+            <h3>
+              <a href="{{ url_for('lec_page', lec_id = lec['id_lec']) }}">
+                {{ lec['lec_name'] }}
+              </a>
+            </h3>
+            <i class="far fa-user">{{ lec['form'] }}</i>
+            <p class="preview-text">{{ lec['kolichestvo'] }} штук</p>
+            <p class="preview-text">
+              Дата партии: {{ lec['data_partii'] }}
+            </p>
+            <p class="preview-text">
+              Дата истечения срока: {{ lec['dat'] }}
+            </p>
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="{{ lec['kolichestvo'] }}"
+              value="0"
+              id="lec_{{ lec['id_lec'] }}"
+              name="lec_{{ lec['id_lec'] }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+        <button
+          name="sell_lec_for_pat"
+          id="sell_lec_for_pat"
+          class="btn btn-primary mb-5"
+        >
+          Подтвердить продажу
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Apt{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>{{ inf_about_ingr[0]['lec_name'] }}</h1>
+      <h2>Ингредиенты</h2>
+      <div class="post row">
+        {% for ingr in inf_about_ingr %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="#"> {{ ingr['name_ingr'] }} </a>
+          </h3>
+          <p class="preview-text">{{ ingr['kolich_vesh'] }} мл</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% if pseudonims %}
+      <h2>Псевдонимы</h2>
+      <div class="lec-text col-5">
+        {% for ps in pseudonims %}
+        <h5>- {{ ps['psevd'] }}</h5>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

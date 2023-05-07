@@ -1,0 +1,64 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>{{ name_apt[0]['name_apt'] }}</h1>
+      <h2>Перечень лекарств</h2>
+      <form method="POST">
+        <div class="post row">
+          {% for lec in lecs %}
+          <div class="lec-text col-5">
+            <h3>
+              <a href="{{ url_for('lec_page', lec_id = lec['id_lec']) }}">
+                {{ lec['lec_name'] }}
+              </a>
+            </h3>
+            <i class="far fa-user">{{ lec['form'] }}</i>
+            <p class="preview-text">{{ lec['kolichestvo'] }} штук</p>
+            <p class="preview-text">
+              Дата партии: {{ lec['data_partii'] }}
+            </p>
+            <p class="preview-text">
+              Дата истечения срока: {{ lec['dat'] }}
+            </p>
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="{{ lec['kolichestvo'] }}"
+              value="0"
+              id="lec_{{ lec['id_lec'] }}"
+              name="lec_{{ lec['id_lec'] }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+        <button name="sell_lec" id="sell_lec" class="btn btn-primary mb-5">
+          Подтвердить продажу
+        </button>
+      </form>
+      {% if session['adm'] %}
+      <form
+        method="GET"
+        action="{{ url_for('adding_page', id_apt = session['id_apt']) }}"
+      >
+        <button name="add_lec" id="add_lec" class="btn btn-light mb-5">
+          Добавить лекарство в ассортимент
+        </button>
+      </form>
+      <form
+        method="GET"
+        action="{{ url_for('del_page', id_apt = session['id_apt']) }}"
+      >
+        <button name="del_lec" id="del_lec" class="btn btn-light mb-5">
+          Удалить лекарства и ассортимента
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

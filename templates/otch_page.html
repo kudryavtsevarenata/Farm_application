@@ -1,0 +1,27 @@
+{% extends 'sidebar.html' %}
+{% block title %}Отчет{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>Аптека: {{ otch[0]['name_apt'] }}</h1>
+      <h2>История продаж</h2>
+      <div class="post row">
+        {% for zap in otch %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="{{ url_for('lec_page', lec_id = zap['id_lec']) }}">
+              {{ zap['lec_name'] }}
+            </a>
+          </h3>
+          <i class="far fa-user">{{ zap['sell_date'] }}</i>
+          <p class="preview-text">
+            Количество единиц товара: {{ zap['kol_uch'] }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

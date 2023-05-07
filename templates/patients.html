@@ -1,0 +1,37 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h2>Пациенты</h2>
+      <div class="post row">
+        {% for pat in patients %}
+        <div class="lec-text col-5">
+          <form
+            method="GET"
+            action="{{ url_for('sell_lec_pat', id_pat=pat['id_pac']) }}"
+          >
+            <h3>
+              <a href="{{ url_for('diag_page', id_pat = pat['id_pac']) }}">
+                {{ pat['surname'] }} {{ pat['name'] }} {% if
+                pat['fathername'] %} {{ pat['fathername'] }} {% endif %}
+              </a>
+            </h3>
+            <i class="far fa-user">{{ pat['birth_data'] }}</i>
+            <p class="preview-text"></p>
+            <button
+              name="sell_pac{{ pat['id_pac'] }}"
+              id="sell_pac{{ pat['id_pac'] }}"
+              class="btn btn-primary mb-5"
+            >
+              Продать лекарства
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

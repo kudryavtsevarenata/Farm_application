@@ -1,0 +1,56 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h2>
+        {{ diag[0]['surname'] }} {{ diag[0]['name'] }} {% if
+        diag[0]['fathername'] %} {{ diag[0]['fathername'] }} {% endif %}
+        (число полных лет: {{ diag[0]['age'] }})
+      </h2>
+      <div class="post row">
+        {% for d in diag %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="#"> {{ d['name_diag'] }} </a>
+          </h3>
+          <i class="far fa-user">тип диагноза: {{ d['diag_type'] }}</i>
+          <p class="preview-text"></p>
+        </div>
+        {% endfor %}
+      </div>
+      <h2>Рецепты пациента</h2>
+      <div class="post row">
+        {% for r in recept_lec %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="#"> {{ r['lec_name'] }} </a>
+          </h3>
+          <i class="far fa-user"
+            >срок действия рецепта: {{ r['end_recept_date'] }}</i
+          >
+          <p></p>
+          <p class="preview-text">
+            Врач: {{r['surname_doc']}} {{r['name_doc']}} {% if
+            r['fathername_doc'] %} {{ r['fathername_doc'] }} {% endif %}
+          </p>
+          <p class="preview-text">Специальность: {{r['prof_doc']}}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% if lgot_info %}
+      <h2>Льготы</h2>
+      <div class="post row">
+        {% for l in lgot_info %}
+        <div class="lec-text col-5">
+          <h3>{{ l['name_lgot'] }}</h3>
+          <i>Скидка: {{ l['discount'] }}%</i>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <form method="POST">
+        <h2>Заказ лекарств</h2>
+        <div class="post row">
+          {% for lec in opp_lec %}
+          <div class="lec-text col-5">
+            <h3>
+              <a href="{{ url_for('lec_page', lec_id = lec['id_lec']) }}">
+                {{ lec['lec_name'] }}
+              </a>
+            </h3>
+            <i class="far fa-user">{{ lec['form'] }}</i>
+            <p class="preview-text"></p>
+            <div class="label_input">
+              <input
+                type="checkbox"
+                id="is_inc{{ lec['id_lec'] }}"
+                name="is_inc{{ lec['id_lec'] }}"
+                value="on{{ lec['id_lec'] }}"
+              />
+            </div>
+            <input
+              type="number"
+              step="1"
+              min="{{ lec['min_limit'] }}"
+              value="{{ lec['min_limit'] }}"
+              id="lec_{{ lec['id_lec'] }}"
+              name="lec_{{ lec['id_lec'] }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+        <button name="add_lec" id="add_lec" class="btn btn-primary mb-5">
+          Добавить
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

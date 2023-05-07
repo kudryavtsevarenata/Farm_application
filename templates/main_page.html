@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Apt{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="content row">
+    <div class="main-content col-md-9 col-12">
+      <h2>Перечень аптек</h2>
+      {% for apt in query %}
+      <div class="post row">
+        <div class="post-text col-12 col-md-8">
+          <h3>
+            <a href="{{ url_for('single_page', apt_id = apt['id_apt']) }}">
+              {{ apt['name_apt'] }}
+            </a>
+          </h3>
+          <i>{{ apt['tip_apt'] }}</i>
+          <p class="preview-text">
+            г. {{ apt['city']}}, ул. {{ apt['street'] }}, д. {{ apt['house'] }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

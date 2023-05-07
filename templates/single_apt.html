@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Apt{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>{{ name_apt[0]['name_apt'] }}</h1>
+      <h2>Перечень лекарств</h2>
+      <div class="post row">
+        {% for lec in query %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="{{ url_for('lec_page', lec_id = lec['id_lec']) }}">
+              {{ lec['lec_name'] }}
+            </a>
+          </h3>
+          <i class="far fa-user">{{ lec['form'] }}</i>
+          <p class="preview-text">{{ lec['kolichestvo'] }} штук</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'sidebar.html' %}
+{% block title %}Apt{% endblock %}
+{% block main_window %}
+<div class="container col-8">
+  <div class="content row">
+    <div class="main-content col-12">
+      <h1>{{ name_apt[0]['name_apt'] }}</h1>
+      <h2>Перечень просроченных лекарств</h2>
+      <div class="post row">
+        {% for lec in lecs %}
+        <div class="lec-text col-5">
+          <h3>
+            <a href="{{ url_for('lec_page', lec_id = lec['id_lec']) }}">
+              {{ lec['lec_name'] }}
+            </a>
+          </h3>
+          <i class="far fa-user">{{ lec['form'] }}</i>
+          <p class="preview-text">{{ lec['kolichestvo'] }} штук</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% if lecs %} {% if session['adm'] %}
+      <form method="POST">
+        <button name="out_days" id="out_days" class="btn btn-primary mb-5">
+          Списать все просроченные партии
+        </button>
+      </form>
+      {% endif %} {% else %}
+      <p>Нет просроченных партий</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

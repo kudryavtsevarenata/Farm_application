@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+    {% block side %}
+        <div class="container sidebar col-3">
+          <ul>
+            <li>
+              <a href="{{ url_for('farm_page', apt_id = session['id_apt']) }}"
+                >Лекарства</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('zayav_page', id_apt = session['id_apt']) }}"
+                >Заявки на поставку</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('out_of_days', apt_id = session['id_apt']) }}"
+                >Просроченные партии</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('patients_page') }}">Пациенты</a>
+            </li>
+            {% if session['adm'] %}
+            <li>
+              <a href="{{ url_for('otch_page', id_apt = session['id_apt']) }}"
+                >Отчет</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+    {% endblock %}
+    {% block main_window %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
